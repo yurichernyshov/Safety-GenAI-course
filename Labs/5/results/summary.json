@@ -1,0 +1,18 @@
+[
+  {
+    "scenario": "clean",
+    "poison_ratio": 0.0,
+    "test_accuracy": 0.9425,
+    "mean_gradient_norm": 0.32866695523262024,
+    "std_gradient_norm": 0.3130142390727997,
+    "anomaly_ratio": 0.045
+  },
+  {
+    "scenario": "poisoned_20",
+    "poison_ratio": 0.2,
+    "test_accuracy": 0.915,
+    "mean_gradient_norm": 0.4783139228820801,
+    "std_gradient_norm": 0.17781151831150055,
+    "anomaly_ratio": 0.04
+  }
+]

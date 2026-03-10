@@ -1,0 +1,3 @@
+scenario,poison_ratio,test_accuracy,mean_gradient_norm,std_gradient_norm,anomaly_ratio
+clean,0.0,0.9425,0.32866695523262024,0.3130142390727997,0.045
+poisoned_20,0.2,0.915,0.4783139228820801,0.17781151831150055,0.04
