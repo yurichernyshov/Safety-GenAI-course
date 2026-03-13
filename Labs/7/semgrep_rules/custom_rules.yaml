@@ -14,7 +14,6 @@ rules:
     metadata:
       cwe: "CWE-89: SQL Injection"
       owasp: "A03:2021-Injection"
-
   - id: python-sql-injection-format
     patterns:
       - pattern: $CONN.execute("..." % $VAR)
