@@ -1,0 +1,88 @@
+rules:
+  # =========================================================
+  # Insecure Model Loading
+  # =========================================================
+  - id: python-ml-unsafe-torch-load
+    patterns:
+      - pattern: torch.load($FILE)
+      - pattern-not: torch.load($FILE, weights_only=True, ...)
+    message: "torch.load() без weights_only=True может выполнить произвольный код (pickle)"
+    severity: ERROR
+    languages: [python]
+    metadata:
+      cwe: "CWE-502: Deserialization of Untrusted Data"
+      mitre-atlas: "TML0004: Model Exploitation"
+
+  - id: python-ml-unsafe-pickle-load
+    patterns:
+      - pattern: pickle.load($FILE)
+    message: "pickle.load() небезопасен для непроверенных данных"
+    severity: ERROR
+    languages: [python]
+    metadata:
+      cwe: "CWE-502"
+
+  - id: python-ml-unsafe-joblib-load
+    patterns:
+      - pattern: joblib.load($FILE)
+    message: "joblib.load() использует pickle внутри, опасен для непроверенных файлов"
+    severity: ERROR
+    languages: [python]
+
+  # =========================================================
+  # LLM Security
+  # =========================================================
+  - id: python-llm-hardcoded-api-key
+    patterns:
+      - pattern: $VAR = "sk-..."
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: (?i)(openai|api_key|token)
+    message: "Hardcoded LLM API Key (OpenAI)"
+    severity: ERROR
+    languages: [python]
+    metadata:
+      cwe: "CWE-798"
+      owasp-llm: "LLM09: Sensitive Information Disclosure"
+
+  - id: python-llm-exec-output
+    patterns:
+      - pattern: exec($LLM_OUTPUT)
+    message: "Выполнение кода, сгенерированного LLM (Insecure Output Handling)"
+    severity: ERROR
+    languages: [python]
+    metadata:
+      cwe: "CWE-95"
+      owasp-llm: "LLM02: Insecure Output Handling"
+
+  - id: python-llm-eval-output
+    patterns:
+      - pattern: eval($LLM_OUTPUT)
+    message: "Вычисление выражения от LLM (Insecure Output Handling)"
+    severity: ERROR
+    languages: [python]
+
+  # =========================================================
+  # Data Security
+  # =========================================================
+  - id: python-ml-untrusted-data-source
+    patterns:
+      - pattern: pd.read_csv($URL)
+      - pattern-not: pd.read_csv("...", ...)
+    message: "Загрузка данных из динамического URL (риск Poisoning/SSRF)"
+    severity: WARNING
+    languages: [python]
+    metadata:
+      mitre-atlas: "TML0010: Data Poisoning"
+
+  - id: python-ml-logging-sensitive-data
+    patterns:
+      - pattern: $LOG.write(..., $USER_INPUT, ...)
+      - metavariable-regex:
+          metavariable: $LOG
+          regex: (log|write|print)
+    message: "Возможное логирование пользовательских данных (Privacy Risk)"
+    severity: WARNING
+    languages: [python]
+    metadata:
+      owasp-llm: "LLM09: Sensitive Information Disclosure"

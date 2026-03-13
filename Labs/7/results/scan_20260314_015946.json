@@ -1,0 +1,85 @@
+                    
+                    
+┌──────────────────┐
+│ 14 Code Findings │
+└──────────────────┘
+                                        
+  [36m[22m[24m  vulnerable_app/api.py[0m
+   ❯❯❱ [1msemgrep_rules.python-command-injection-os-system[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Command Injection через os.system() с переменными
+                                                           
+           21┆ os.system(f"ping -c 4 {host}")
+   
+   ❯❯❱ [1msemgrep_rules.python-command-injection-subprocess-shell[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Command Injection через subprocess с shell=True
+                                                         
+           30┆ subprocess.run(cmd, shell=True)
+   
+   ❯❯❱ [1msemgrep_rules.python-insecure-deserialization-pickle[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Insecure Deserialization через pickle
+                                               
+           39┆ obj = pickle.loads(base64.b64decode(data))
+   
+   ❯❯❱ [1msemgrep_rules.python-code-injection-eval[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Code Injection через eval() с переменными
+                                                   
+           48┆ result = eval(code)
+   
+   ❯❯❱ [1msemgrep_rules.python-llm-eval-output[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Вычисление выражения от LLM (Insecure Output Handling)
+                                                                
+           48┆ result = eval(code)
+   
+    ❯❱ [1msemgrep_rules.python-debug-mode-enabled[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Debug mode включён в production
+                                         
+           53┆ app.run(debug=True, host='0.0.0.0')
+   
+    ❯❱ [1msemgrep_rules.python-flask-all-hosts[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Flask приложение слушает все интерфейсы
+                                                 
+           53┆ app.run(debug=True, host='0.0.0.0')
+                                         
+  [36m[22m[24m  vulnerable_app/auth.py[0m
+    ❯❱ [1msemgrep_rules.python-weak-hash-md5[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Использование слабого хеш-алгоритма MD5
+                                                 
+           17┆ input_hash = hashlib.md5(input_password.encode()).hexdigest()
+                                           
+  [36m[22m[24m  vulnerable_app/config.py[0m
+   ❯❯❱ [1msemgrep_rules.python-hardcoded-password[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Hardcoded secret в коде
+                                 
+            9┆ API_KEY = "sk-1234567890abcdef"
+            ⋮┆----------------------------------------
+           10┆ SECRET_TOKEN = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   
+    ❯❱ [1msemgrep_rules.python-weak-hash-md5[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Использование слабого хеш-алгоритма MD5
+                                                 
+           17┆ return hashlib.md5(password.encode()).hexdigest()
+                                          
+  [36m[22m[24m  vulnerable_app/utils.py[0m
+    ❯❱ [1msemgrep_rules.python-path-traversal-open[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Возможный Path Traversal
+                                  
+           15┆ with open(filepath, 'w') as f:
+            ⋮┆----------------------------------------
+           25┆ with open(filepath, 'r') as f:
+   
+    ❯❱ [1msemgrep_rules.python-ssrf-urllib[0m
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Возможный SSRF через urllib.request.urlopen
+                                                     
+           33┆ response = urllib.request.urlopen(url)

@@ -1,0 +1,43 @@
+rules:
+  # =========================================================
+  # XSS Detection
+  # =========================================================
+  - id: python-xss-flask-render-template-string
+    patterns:
+      - pattern: render_template_string($TEMPLATE, ...)
+      - pattern-not: render_template_string("...", ...)
+    message: "Возможный XSS через render_template_string с переменными"
+    severity: WARNING
+    languages: [python]
+    metadata:
+      cwe: "CWE-79: XSS"
+      owasp: "A03:2021-Injection"
+
+  # =========================================================
+  # SSRF Detection
+  # =========================================================
+  - id: python-ssrf-urllib
+    patterns:
+      - pattern: urllib.request.urlopen($URL)
+      - pattern-not: urllib.request.urlopen("...", ...)
+    message: "Возможный SSRF через urllib.request.urlopen"
+    severity: WARNING
+    languages: [python]
+    metadata:
+      cwe: "CWE-918: SSRF"
+      owasp: "A10:2021-SSRF"
+
+  # =========================================================
+  # Information Disclosure
+  # =========================================================
+  - id: python-print-sensitive-data
+    patterns:
+      - pattern: print(..., $VAR, ...)
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: (?i)(password|secret|token|key|credential)
+    message: "Возможная утечка чувствительных данных через print"
+    severity: WARNING
+    languages: [python]
+    metadata:
+      cwe: "CWE-532: Information Disclosure"
