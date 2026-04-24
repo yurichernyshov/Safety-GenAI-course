@@ -60,7 +60,7 @@ HDD существенно замедлит загрузку модели (де�
 ## Yandex Cloud
 
 Рабочая консоль https://console.yandex.cloud/
-![Рабочая консоль](/images/console.png)
+![Рабочая консоль](images/console.png")
  
 Compute cloud
 
