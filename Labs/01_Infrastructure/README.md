@@ -96,16 +96,16 @@ NVIDIA Tesla T4 — это профессиональная видеокарта
 Посмотреть доступные устройства можно с помощью команды “ubuntu-drivers devices”, если ее нет, то установить «apt install ubuntu-drivers-common»
 ubuntu-drivers devices
  
-'''bash
+```bash
 $ ubuntu-drivers autoinstall
-'''
+```
 
 важно: нужен reboot!
 
 Проверить загрузку ядра модуля
-'''bash
+```bash
 $ lsmod | grep nvidia
-'''
+```
 
 Проверить логи
 '''bash
