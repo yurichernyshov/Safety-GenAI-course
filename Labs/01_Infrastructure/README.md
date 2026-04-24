@@ -106,9 +106,9 @@ NVIDIA Tesla T4 — это профессиональная видеокарта
 •	Nvidia Datacenter Drivers https://docs.nvidia.com/datacenter/tesla/drivers/index.html
 •	https://ubuntu.com/blog/nvidia-open-gpu-kernel-modules-ubuntu-24-04
 
-Для мониторинга GPU Nvidia используется утилита `bash nvidia-smi`. Если ее нет, то наверняка не установлены драйверы. 
-Посмотреть доступные устройства можно с помощью команды `bash ubuntu-drivers devices`, 
-если ее нет, то установить `bash apt install ubuntu-drivers-common`
+Для мониторинга GPU Nvidia используется утилита `nvidia-smi`. Если ее нет, то наверняка не установлены драйверы. 
+Посмотреть доступные устройства можно с помощью команды `ubuntu-drivers devices`, 
+если ее нет, то установить `apt install ubuntu-drivers-common`
 
 ```bash
 $ ubuntu-drivers devices
