@@ -63,15 +63,35 @@ HDD существенно замедлит загрузку модели (де�
 ![Рабочая консоль](images/console.png)
  
 Compute cloud
+![Compute cloud](images/compute_cloud.png)
 
 Создать виртуальную машину
+![Создать виртуальную машину](images/create_virtual_machine.png)
+
+![Создание диска и файлового хранилища](images/create_disk.png)
+
+![Создание CPU](images/create_cpu.png)
+
+![Создание GPU](images/create_gpu.png)
+
+![Создание сети](images/create_network.png)
+
+![Создание ssh](images/create_ssh-1.png)
+
+![Создание ssh](images/create_ssh-2.png)
+
+![Создание ssh](images/create_ssh-3.png)
+
+![Создание ssh](images/create_ssh-3.png)
+
 
 
 Из соображений цены (удобный калькулятор сразу же делает расчет после выбираемых компонентов виртуальной инфраструктуры) выбираем Nvidia T4.
-NVIDIA Tesla T4 — это профессиональная видеокарта (ускоритель) для дата-центров, выпущенная в 2018 году на архитектуре Turing. Она специализируется на инференсе (выводе) ИИ-моделей и широко используется в облачных сервисах.
+NVIDIA Tesla T4 — это профессиональная видеокарта (ускоритель) для дата-центров, выпущенная в 2018 году на архитектуре Turing. 
+Она специализируется на инференсе (выводе) ИИ-моделей и широко используется в облачных сервисах.
  
 Наконец, мы добрались до самой важной кнопки – «Создать ВМ». Можно правда нажать и кнопку «Отменить».
- 
+![Создать виртуальную машину](images/create_vm_end.png) 
 
 Минусы и ограничения GPU T4
 Устаревшая архитектура (Turing 2018 г.) — медленнее современных карт (Ampere/Ada) на 30–50% при одинаковом объёме памяти
@@ -86,16 +106,20 @@ NVIDIA Tesla T4 — это профессиональная видеокарта
 •	Nvidia Datacenter Drivers https://docs.nvidia.com/datacenter/tesla/drivers/index.html
 •	https://ubuntu.com/blog/nvidia-open-gpu-kernel-modules-ubuntu-24-04
 
-Для мониторинга GPU Nvidia используется утилита ```bash nvidia-smi```. Если ее нет, то наверняка не установлены драйверы. 
-Посмотреть доступные устройства можно с помощью команды ```bash ubuntu-drivers devices```, 
-если ее нет, то установить ```bash apt install ubuntu-drivers-common```
+Для мониторинга GPU Nvidia используется утилита `bash nvidia-smi`. Если ее нет, то наверняка не установлены драйверы. 
+Посмотреть доступные устройства можно с помощью команды `bash ubuntu-drivers devices`, 
+если ее нет, то установить `bash apt install ubuntu-drivers-common`
 
 ```bash
 $ ubuntu-drivers devices
+```
+![ubuntu-drivers](images/ubuntu-drivers-devices.png)
+
+```bash
 $ ubuntu-drivers autoinstall
 ```
 
-важно: нужен reboot!
+Важно: нужен reboot!
 
 Проверить загрузку ядра модуля
 ```bash
