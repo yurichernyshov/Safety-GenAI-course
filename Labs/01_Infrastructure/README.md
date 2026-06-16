@@ -262,18 +262,24 @@ $ ./main -m ./qwen3-8b-Q4_K_M.gguf \
 
 Некоторые распространенные функции библиотеки langchain
 
-|:-:|:-:|:-:|
 |Функция|Что делает|Синтаксис|
 |:-:|:-:|:-:|
-
 | ChatOllama()	| Инициализация локальной модели	| ChatOllama(model="llama3.2", temperature=0.7) |
+|:-:|:-:|:-:|
 | invoke()	| отправляет запрос к модели	| llm.invoke("текст") → ответ |
+|:-:|:-:|:-:|
 | stream()	| возвращает ответ по частям	| llm.stream("текст") |
+|:-:|:-:|:-:|
 | batch()	| отправляет несколько запросов параллельно	| llm.batch(["q1", "q2"]) |
+|:-:|:-:|:-:|
 | ChatPromptTemplate.from_template()	| Шаблон с переменной	| ChatPromptTemplate.from_template("{var}") |
+|:-:|:-:|:-:|
 | ChatPromptTemplate.from_messages()	| Шаблон с ролями	| from_messages([("system", "..."), ("human", "...")]) |
+|:-:|:-:|:-:|
 | StrOutputParser()	| Извлечение текста из ответа	parser.invoke(ai_message) → строка |
+|:-:|:-:|:-:|
 | LCEL (промпт \| llm \| парсер)	| Создание цепочки	| chain = prompt \| llm \| parser |
+|:-:|:-:|:-:|
 | .content |	извлекает текст из ответа	| response.content |
 |:-:|:-:|:-:|
 
