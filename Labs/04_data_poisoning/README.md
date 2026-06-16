@@ -1,6 +1,12 @@
 # Реализация атаки отравления данных (TML0010 Data Poisoning) и анализ влияния на модель машинного обучения
 
-Общие сведения
+# Оглавление
+- [Общие сведения](#Общие-сведения)
+- [Этапы лабораторной работы](#Этапы-лабораторной-работы)
+- [Вопросы](#Вопросы)
+- [Литература](#Литература)
+
+# Общие сведения
 Таксономия техник и тактик атак и защиты MITRE.
 Исследование уязвимостей ML-систем к атакам на целостность обучающих данных в соответствии с таксономией MITRE ATLAS.
 
@@ -10,8 +16,6 @@
 3.	Количественно оценить влияние отравленных данных на метрики качества модели (Accuracy, Precision, Recall, F1).
 4.	Исследовать эффективность различных типов атак (случайный шум vs целевое отравление).
 5.	Разработать и протестировать методы обнаружения аномалий в данных для защиты пайплайна.
-
-Теоретические сведения
 
 Data Poisoning — это атака на целостность данных, при которой злоумышленник внедряет вредоносные примеры в обучающий набор данных. 
 Это приводит к тому, что модель обучается на некорректных зависимостях.
@@ -32,7 +36,9 @@ Data Poisoning — это атака на целостность данных, �
 Adversarial Threat Landscape for Artificial-Intelligence Systems
 
 
-Подготовка окружения
+# Этапы лабораторной работы
+
+## Подготовка инфраструктуры проекта
 
 ```bash
 $ python -m venv venv-2-2-data-poison
@@ -42,7 +48,6 @@ $ pip install jupyter
 $ jupyter notebook
 ```
  
-
 ![Рабочее пространство Jupyter Notebook](images/jupyter1.png)
 
 ![Создание файла в Jupyter Notebook](images/jupyter2.png)
@@ -85,8 +90,10 @@ if __name__ == "__main__":
     df.to_csv("data/clean_test.csv", index=False) # Отдельный тестовый набор
     print(f"Датасет создан: {len(df)} записей")
     print(f"   Распределение классов:\n{df['label'].value_counts()}")
+```
 
-Обучение базовой модели
+## Обучение базовой модели
+```python
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -130,8 +137,11 @@ def train_and_evaluate(train_path, test_path, model_name="baseline"):
 
 if __name__ == "__main__":
     train_and_evaluate("data/clean_train.csv", "data/clean_test.csv", "baseline")
+```
 
-Реализация атаки Data Poisoning (TML0010)
+## Реализация атаки Data Poisoning (TML0010)
+
+```python
 import pandas as pd
 import numpy as np
 
@@ -372,3 +382,16 @@ if __name__ == "__main__":
     plt.savefig("detection_results.png", dpi=300)
     plt.show()
 ```
+
+[Назад к Оглавлению](#Оглавление
+
+# Вопросы
+
+
+[Назад к Оглавлению](#Оглавление
+
+# Литература
+
+[Назад к Оглавлению](#Оглавление)
+
+
